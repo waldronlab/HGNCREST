@@ -1,0 +1,93 @@
+---
+title: "Functions for querying the HGNC REST API"
+author:
+- name: Marcel Ramos
+  affiliation: CUNY School of Public Health, New York, NY
+date: "`r BiocStyle::doc_date()`"
+vignette: |
+  %\VignetteIndexEntry{HGNCREST}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    toc_float: true
+package: HGNCREST
+---
+
+# HGNCREST
+
+The `HGNCREST` package provides functions for querying the HGNC REST API. The
+functions follow the HUGO Gene Nomenclature Committee (HGNC) REST API
+documentation at <https://www.genenames.org/help/rest/>. There are three main
+operations that can be performed with this package:
+
+1. fetching general information about the HGNC database (`hgnc_info`).
+2. fetching information about a specific gene (`hgnc_fetch`)
+3. searching for genes based on a query (`hgnc_search`)
+
+# Installation
+
+```{r, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("waldronlab/HGNCREST")
+```
+
+## Package load
+
+```{r,include=TRUE,results="hide",message=FALSE,warning=FALSE}
+library(HGNCREST)
+```
+
+# General information
+
+The `hgnc_info` function returns general information about the HGNC database.
+It includes `searchableFields` and `storedFields` metadata.
+
+```{r}
+hgnc_info()
+```
+
+# Searchable fields
+
+The `searchableFields` function is a convenience function that returns a
+character vector of searchable fields in the HGNC database.
+
+```{r}
+searchableFields()
+```
+
+# Fetching gene information
+
+The `hgnc_fetch` function returns a `tibble` with information about the gene
+specified by the `searchableField` and `value` arguments.
+
+```{r}
+hgnc_fetch("ena", "BC040926")
+```
+
+# Searching for genes
+
+The `hgnc_search` function searches for genes based on a query. It returns a
+`data.frame` with information about the genes that match the query.
+
+```{r}
+hgnc_search("symbol", "BRCA1")
+```
+
+# Conclusion
+
+The `HGNCREST` package provides a convenient way to query the HGNC REST API
+from R. It allows users to fetch information about specific genes, search for
+genes based on a query, and get general information about the HGNC database.
+
+# sessionInfo
+
+<details> <summary> Click to expand </summary>
+
+```{r}
+sessionInfo()
+```
+
+</details>
