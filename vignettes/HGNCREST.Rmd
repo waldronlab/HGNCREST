@@ -76,6 +76,31 @@ The `hgnc_search` function searches for genes based on a query. It returns a
 hgnc_search("symbol", "BRCA1")
 ```
 
+# Advanced search
+
+The `hgnc_search` function also allows for more complex queries using the
+`query` argument. The query should be a string that follows the HGNC REST API
+query syntax.
+
+```{r}
+hgnc_search("symbol", c("ZNF*", "AND", "status:Approved")) |>
+    head()
+```
+
+# Searching for genes based on multiple criteria
+
+In this example, we search for genes with the name "MAPK interacting" and that
+have a locus type of "gene with protein product". Note that "locus_type" is a
+searchable field in the HGNC database that can be used to filter the search
+results.
+
+```{r}
+hgnc_search(
+    "name",
+    c("MAPK interacting", "AND", "locus_type:gene with protein product")
+)
+```
+
 # Conclusion
 
 The `HGNCREST` package provides a convenient way to query the HGNC REST API
