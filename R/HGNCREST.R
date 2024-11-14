@@ -102,12 +102,19 @@ hgnc_fetch <- function(searchableField, value) {
 #' @importFrom BiocBaseUtils isCharacter
 #' @examples
 #' hgnc_search(query = "BRAF")
-#' hgnc_search("symbol", "ZNF*")
-#' hgnc_search("symbol", c("ZNF*", "AND", "status:Approved"))
+#' hgnc_search("symbol", "ZNF*") |>
+#'     head()
+#' hgnc_search("symbol", c("ZNF*", "AND", "status:Approved")) |>
+#'     head()
 #' hgnc_search("symbol", c("ZNF3", "OR", "ZNF12"))
-#' hgnc_search("symbol", c("ZNF*", "NOT", "status:Approved"))
-#' hgnc_search("symbol", c("ZNF*", "AND", 'status:Entry withdrawn'))
-#' hgnc_search("name", c("MAPK interacting", "AND", "locus_type:gene with protein product"))
+#' hgnc_search("symbol", c("ZNF*", "NOT", "status:Approved")) |>
+#'     head()
+#' hgnc_search("symbol", c("ZNF*", "AND", 'status:Entry withdrawn')) |>
+#'     head()
+#' hgnc_search(
+#'     "name",
+#'     c("MAPK interacting", "AND", "locus_type:gene with protein product")
+#' )
 #' @export
 hgnc_search <- function(searchableField = NULL, query) {
     if (!missing(searchableField))
