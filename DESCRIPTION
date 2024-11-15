@@ -1,21 +1,22 @@
 Package: HGNCREST
-Title: Query the HGNC API with httr2
+Title: Query the HGNC and VGNC APIs with httr2
 Version: 0.99.1
 Authors@R: c(
     person("Marcel", "Ramos", , "marcel.ramos@sph.cuny.edu", c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3242-0582"))
     )
-Description: Query the HGNC API with httr2. The HGNC API provides access to data
-  from the HGNC database, which contains information about human genes. The
-  package provides functions to query the HGNC API and retrieve data about
-  genes, gene families, and gene symbols. The package also provides functions to
-  retrieve data about gene symbols from the HGNC database.
+Description: Query the HGNC and VGNC API with httr2. The HGNC API provides
+  access to data from the HGNC and VGNC database, which contains information
+  about human genes. The package provides functions to query both the HGNC and
+  VGNC APIs to retrieve data about genes, gene families, and gene symbols.
+  The package also provides functions to retrieve data about gene symbols from
+  the HGNC and the sister VGNC database.
 License: Artistic-2.0
 Depends:
     httr2
 Imports: 
     BiocBaseUtils,
-    tidyr,
+    tibble,
     utils
 Suggests:
     BiocStyle,

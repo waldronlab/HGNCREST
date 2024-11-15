@@ -10,13 +10,15 @@
 \usage{
 hgnc_info()
 
-searchableFields()
+searchableFields(service = c("HGNC", "VGNC"))
 
 hgnc_fetch(searchableField, value)
 
 hgnc_search(searchableField = NULL, query)
 }
 \arguments{
+\item{service}{\code{character(1)} Either "HGNC" or "VGNC".}
+
 \item{searchableField}{\code{character(1)} A field as provided by
 \code{searchableFields()}.}
 
@@ -36,7 +38,7 @@ hgnc_info: A list of general information about the HGNC database. It
 includes \code{searchableFields} and \code{storedFields} metadata.
 
 searchableFields: A character vector of searchable fields in the
-HGNC database.
+HGNC or VGNC database.
 
 hgnc_fetch: A \code{tibble} with information about the gene specified by
 the \code{searchableField} and \code{value} arguments.

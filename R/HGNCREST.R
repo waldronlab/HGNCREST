@@ -18,23 +18,22 @@
 #' hgnc_info()
 #' @export
 hgnc_info <- function() {
-    request("https://rest.genenames.org/") |>
-        req_template("/info/") |>
-        req_headers(Accept = "application/json") |>
-        req_perform() |>
-        resp_body_json(simplifyVector = TRUE)
+    .info_req("HGNC")
 }
 
 #' @rdname HGNCREST
 #'
+#' @param service `character(1)` Either "HGNC" or "VGNC".
+#'
 #' @returns searchableFields: A character vector of searchable fields in the
-#'   HGNC database.
+#'   HGNC or VGNC database.
 #'
 #' @examples
 #' searchableFields()
 #' @export
-searchableFields <- function() {
-    response <- hgnc_info()
+searchableFields <- function(service = c("HGNC", "VGNC")) {
+    service <- match.arg(service)
+    response <- .info_req(service)
     response[["searchableFields"]]
 }
 
@@ -55,34 +54,7 @@ searchableFields <- function() {
 #' @export
 hgnc_fetch <- function(searchableField, value) {
     stopifnot(isScalarCharacter(searchableField), isScalarCharacter(value))
-    response <- request("https://rest.genenames.org/") |>
-        req_template("/fetch/{searchableField}/{value}") |>
-        req_headers(Accept = "application/json") |>
-        req_perform() |>
-        resp_body_json(simplifyVector = TRUE)
-
-    res_data <- response[[c("response", "docs")]]
-
-    lcols <- vapply(res_data, is.list, logical(1L))
-
-    tidyr::unnest(res_data, cols = names(lcols[lcols]))
-}
-
-.encode_string_dquote <- function(string) {
-    hasSpace <- grepl("\\s+", string)
-    hasDquote <- grepl('"', string)
-    hasColon <- grepl(":", string)
-    if (hasSpace && !hasDquote) {
-        if (hasColon) {
-            splits <- strsplit(string, ":", fixed = TRUE) |> unlist()
-            if (!identical(length(splits), 2L))
-                stop("More than one colon in single query string")
-            string <- paste0(splits[1L], ":", dQuote(splits[2L]))
-        } else {
-            string <- dQuote(string)
-        }
-    }
-    utils::URLencode(string)
+    .fetch_req("HGNC", searchableField, value)
 }
 
 #' @rdname HGNCREST
@@ -120,15 +92,5 @@ hgnc_search <- function(searchableField = NULL, query) {
     if (!missing(searchableField))
         stopifnot(isScalarCharacter(searchableField))
     stopifnot(isCharacter(query))
-    query <- vapply(query, .encode_string_dquote, character(1L))
-    if (length(query) > 1L)
-        query <- paste(query, collapse = "+")
-    template <- paste0("/search/", searchableField, "/{query}")
-    response <- request("https://rest.genenames.org/") |>
-        req_template(template) |>
-        req_headers(Accept = "application/json") |>
-        req_perform() |>
-        resp_body_json(simplifyVector = TRUE)
-
-    response[[c("response", "docs")]]
+    .search_req("HGNC", searchableField, query)
 }
