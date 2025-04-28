@@ -13,6 +13,7 @@ Description: Query the HGNC and VGNC API with httr2. The HGNC API provides
   the HGNC and the sister VGNC database.
 License: Artistic-2.0
 Depends:
+    R (>= 4.1.0)
     httr2
 Imports: 
     BiocBaseUtils,
