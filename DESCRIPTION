@@ -1,6 +1,6 @@
 Package: HGNCREST
 Title: Query the HGNC and VGNC APIs with httr2
-Version: 0.99.4
+Version: 0.99.5
 Authors@R: c(
     person("Marcel", "Ramos", , "marcel.ramos@sph.cuny.edu", c("aut", "cre"),
     c(ORCID = "0000-0002-3242-0582")))
@@ -26,4 +26,4 @@ Encoding: UTF-8
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Date: 2025-04-28
+Date: 2025-05-07
