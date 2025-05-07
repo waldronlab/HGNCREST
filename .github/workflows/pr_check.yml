@@ -110,12 +110,12 @@ jobs:
         shell: Rscript {0}
 
       - name: Build pkgdown
-        if: ${{ github.ref == format('refs/heads/{0}', env.BIOC_RELEASE) && github.event_name != 'pull_request' }}
+        if: ${{ github.ref == 'refs/heads/devel' && github.event_name != 'pull_request' }}
         run: |
            PATH=$PATH:$HOME/bin/ Rscript -e 'pkgdown::build_site()'
 
       - name: Upload pkgdown artifact
-        if: github.ref == format('refs/heads/{0}', env.BIOC_RELEASE)
+        if: github.ref == 'refs/heads/devel'
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs
@@ -165,7 +165,7 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        if: ${{ github.ref == format('refs/heads/{0}', env.BIOC_RELEASE) && github.event_name != 'pull_request' }}
+        if: ${{ github.ref == 'refs/heads/devel' && github.event_name != 'pull_request' }}
         id: deployment
         uses: actions/deploy-pages@v4
 
