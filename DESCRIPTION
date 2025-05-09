@@ -11,6 +11,7 @@ Description: Query the HGNC and VGNC API with httr2. The HGNC API provides
   The package also provides functions to retrieve data about gene symbols from
   the HGNC and the sister VGNC database.
 License: Artistic-2.0
+biocViews: Annotation, AnnotationData, DataImport, Homo_sapiens
 Depends:
     R (>= 4.5.0),
     httr2
