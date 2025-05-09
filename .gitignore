@@ -23,7 +23,7 @@
 *.Rproj
 
 # produced vignettes
-vignettes/*.html
+*.html
 vignettes/*.pdf
 *.html
 
